@@ -1,13 +1,8 @@
-grade = 0.8
-grade = (0.8 * grade) + (0.2 + 0.5)
+#student = {'name': 'Thiago', 'age': 20, 'courses': ['P3', 'PAA']}
 
-print(grade)
-
-student = {'name': 'Thiago', 'age': 20, 'courses': ['P3', 'PAA']}
-
-student.update({'name': 'Glauber', 'phone': '(82)98860-8635'})
+#student.update({'name': 'Glauber', 'phone': '(82)98860-8635'})
 #age = student.pop('age')
-del student['phone']
+#del student['phone']
 
 #print(student.get('phone', 'Not Found'))
 #print(student)
@@ -17,5 +12,8 @@ del student['phone']
 #print(len(student))
 #print(age)
 
-for key, value in student.items():
-    print(key, value)
+#for key, value in student.items():
+ #   print(key, value)
+
+x = input()
+print(type(x))
