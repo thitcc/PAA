@@ -1,19 +1,35 @@
-def binarySearch(array, element, size):
-    begin = 0
-    middle = 0
-    end = size - 1
+def cut(array, tree):
+    global k
+    pieces = 0
 
-    while begin <= end:
+    for n in array:
+        sub = n - tree
+        if sub > 0:
+            pieces += sub
+
+    k += 1
+
+    return pieces
+
+
+def search(array, begin, end):
+    global min
+    global result
+    global woods
+
+    if begin <= end:
         middle = int((begin + end) / 2)
-        if array[middle] < element:
-            begin = middle + 1
-        elif array[middle] > element:
-            end = middle - 1
+        pieces = cut(array, array[k])
+        if pieces >= woods:
+            if pieces < min:
+                min = pieces
+                result = array[k-1]
+            search(array, middle+1, end)
         else:
-            return middle
+            search(array, begin, middle-1)
 
 
-trees, woods = input().split()
+size, woods = [int(x) for x in input().split()]
 
 treeHeight = []
 
@@ -21,5 +37,5 @@ for i in input().split():
     treeHeight.append(int(i))
 
 treeHeight.sort()
-
-
+search(treeHeight, treeHeight[0], treeHeight[size-1])
+print(result)

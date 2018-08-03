@@ -1,6 +1,6 @@
-def binarySearch(array, element, size):
+def binary_search(array, element):
     begin = 0
-    end = size - 1
+    end = len(array) - 1
 
     while begin <= end:
         middle = int((begin + end) / 2)

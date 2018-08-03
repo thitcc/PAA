@@ -1,48 +1,45 @@
-def merge(a, temp, left, mid, right):
-    inv = 0
-    i = left
-    j = mid
+def merge(left, right):
+    global count
+    array = []
+    i = 0
+    j = 0
 
-    while i <= mid-1 and j <= right:
-        if a[i] < a[j]:
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            array.append(left[i])
             i += 1
-            temp.append(a[i])
         else:
+            array.append(right[j])
             j += 1
-            temp.append(a[j])
-            inv += mid - i
+            count += len(left) - i
 
-    while i <= mid - 1:
+    while i < len(left):
+        array.append(left[i])
         i += 1
-        temp.append(a[i])
 
-    while j <= right:
+    while j < len(right):
+        array.append(right[j])
         j += 1
-        temp.append(a[j])
 
-    for left in range(left, right):
-        a[left] = temp[left]
-
-    return inv
+    return array
 
 
-def merge_sort(a, temp, left, right):
+def merge_sort(data):
 
-    inv = 0
-
-    if left < right:
-        mid = int((left + right) / 2)
-        inv = merge_sort(a, temp, left, mid)
-        inv += merge_sort(a, temp, mid+1, right)
-        inv += merge(a, temp, left, mid+1, right)
-
-    return inv
+    if len(data) > 1:
+        middle = int(len(data) / 2)
+        left = merge_sort(data[0: middle])
+        right = merge_sort(data[middle: len(data)])
+        return merge(left, right)
+    else:
+        return data
 
 
 for t in range(int(input())):
-    blank = input()
+    input()
     a = []
-    temp = []
     for n in range(int(input())):
         a.append(int(input()))
-    print(merge_sort(a, temp, 0, len(a)-1))
+    count = 0
+    merge_sort(a)
+    print(count)

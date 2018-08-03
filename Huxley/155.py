@@ -1,31 +1,35 @@
-def divisions(array, middle, people):
-    divisions = 0
+def distribution(array, size):
+    global people
+    slices = 0
 
-    for i in array
+    for bread in array:
+        slices += int(bread / size)
+        if slices >= people:
+            return True
+
+    return False
 
 
-def search(array, people, begin, end):
-    begin = 0
-    end = len(array) - 1
+def search(array, begin, end):
+    global result
 
     if begin <= end:
         middle = int((begin + end) / 2)
-        if divisions(array, middle):
-            if middle > resp:
-                resp = middle
-
-
-
-    return -1
+        if distribution(array, middle):
+            if middle > result:
+                result = middle
+            search(array, middle+1, end)
+        else:
+            search(array, begin, middle-1)
 
 
 people = int(input())
 sandwich = int(input())
 
-cent = [int(x) for x in input().split()]
+a = [int(x) for x in input().split()]
+a.sort()
 
-cent.sort()
+result = 0
+search(a, a[0], a[len(a)-1])
 
-print(search(cent, people, cent[0], cent[sandwich-1]))
-
-
+print(result)
