@@ -13,7 +13,6 @@ def cut(array, tree):
 
 
 def search(array, begin, end):
-    global min
     global result
     global woods
 
@@ -21,9 +20,7 @@ def search(array, begin, end):
         middle = int((begin + end) / 2)
         pieces = cut(array, array[k])
         if pieces >= woods:
-            if pieces < min:
-                min = pieces
-                result = array[k-1]
+            result = array[k-1]
             search(array, middle+1, end)
         else:
             search(array, begin, middle-1)
@@ -37,5 +34,7 @@ for i in input().split():
     treeHeight.append(int(i))
 
 treeHeight.sort()
+k = 0
+result = 0
 search(treeHeight, treeHeight[0], treeHeight[size-1])
 print(result)
