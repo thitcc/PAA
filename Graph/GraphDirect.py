@@ -1,13 +1,11 @@
-def initGraphDirect():
+def initGraphDirect(v):
     graph = []
-    v = 4
     for i in range(v):
         graph.append([])
-    graph[0].append(1)
-    graph[0].append(2)
-    graph[0].append(2)
-    graph[0].append(3)
+    graph[0].append((1, 2))
+    graph[0].append((2, 6))
+    graph[0].append((3, 1))
     print(graph)
 
 
-initGraphDirect()
+initGraphDirect(4)
