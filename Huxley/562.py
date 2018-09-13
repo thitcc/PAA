@@ -1,7 +1,7 @@
-from heapq import *
+from heapq import heappush, heappop
 
 
-def initGraphUndirected(v):
+def initGraph(v):
     graph = []
     for _ in range(v):
         graph.append([])
@@ -9,8 +9,8 @@ def initGraphUndirected(v):
 
 
 def addEdge(graph, source, destiny, weight):
-    graph[source].append((destiny, weight))
-    graph[destiny].append((source, weight))
+    graph[source].append((weight, destiny))
+    graph[destiny].append((weight, source))
 
 
 def dijkstra(graph, origin, destiny):
@@ -18,11 +18,11 @@ def dijkstra(graph, origin, destiny):
     visited = [False] * len(graph)
     dist = [float('inf')] * len(graph)
     dist[origin] = 0
-    heappush(pq, (origin, 0))
+    heappush(pq, (0, origin))
 
     while len(pq) != 0:
         v = heappop(pq)
-        e = v[0]
+        e = v[1]
 
         if visited[e]:
             continue
@@ -31,26 +31,26 @@ def dijkstra(graph, origin, destiny):
 
         for i in range(len(graph[e])):
             v = graph[e][i]
-            if dist[e] + v[1] < dist[v[0]]:
-                dist[v[0]] = dist[e] + v[1]
-                heappush(pq, (v[0], dist[v[0]]))
+            if dist[e] + v[0] < dist[v[1]]:
+                dist[v[1]] = dist[e] + v[0]
+                heappush(pq, (dist[v[1]], v[1]))
 
     return dist[destiny]
 
 
-for case in range(int(input())):
+for case in range(1, int(input()) + 1):
     n, m = [int(x) for x in input().split()]
-    graph = initGraphUndirected(n + 1)
+    graph = initGraph(n + 1)
 
     for _ in range(m):
         u, v, c = [int(x) for x in input().split()]
         addEdge(graph, u, v, c)
-    k = int(input())
 
+    k = int(input())
     deliveries = [int(x) for x in input().split()]
     total = 0
 
     for deliver in deliveries:
         total += dijkstra(graph, 1, deliver) * 2
 
-    print("caso {}: {}".format(case + 1, total))
+    print("caso {}: {}".format(case, total))
