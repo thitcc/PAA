@@ -13,7 +13,7 @@ def addEdge(graph, source, destiny, weight):
     graph[destiny].append((weight, source))
 
 
-def dijkstra(graph, origin, destiny):
+def dijkstra(graph, origin):
     pq = []
     visited = [False] * len(graph)
     dist = [float('inf')] * len(graph)
@@ -35,7 +35,7 @@ def dijkstra(graph, origin, destiny):
                 dist[v[1]] = dist[e] + v[0]
                 heappush(pq, (dist[v[1]], v[1]))
 
-    return dist[destiny]
+    return dist
 
 
 for case in range(1, int(input()) + 1):
@@ -48,9 +48,10 @@ for case in range(1, int(input()) + 1):
 
     k = int(input())
     deliveries = [int(x) for x in input().split()]
+    dist = dijkstra(graph, 1)
     total = 0
 
     for deliver in deliveries:
-        total += dijkstra(graph, 1, deliver) * 2
+        total += dist[deliver] * 2
 
     print("caso {}: {}".format(case, total))
