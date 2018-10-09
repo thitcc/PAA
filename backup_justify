@@ -1,0 +1,35 @@
+def justify(i, j):
+    if memo[i][j] != float('inf'):
+        min_cost[i] = memo[i][j]
+        result[i] = j + 1
+        justify(i - 1, j)
+    else:
+        best = 0
+        for k in range(j, i + 1, -1):
+            total = memo[i][j-1] + min_cost[j]
+            best = best if best < total else total
+        min_cost[i] = best
+        justify(i - 1, textLength)
+
+def justify(text_length):
+    costs = [0] * text_length
+    result = [0] * text_length
+
+    for i in range(text_length - 1, 0, -1):
+        costs[i] = memo[i][text_length - 1]
+        result[i] = text_length
+        for j in range(text_length - 1, i + 1, -1):
+            if memo[i][j-1] == float('inf'):
+                continue
+            if costs[i] > (costs[j] + memo[i][j-1]):
+                costs[i] = costs[j] + memo[i][j-1]
+                result[i] = j
+
+    i = 1
+    j = result[i]
+    final = []
+
+    print(costs)
+    print(result)
+
+    return str(final)
