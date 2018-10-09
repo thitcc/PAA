@@ -66,12 +66,13 @@ def print_txt(i, j):
 
     # The part above follow the same logic of badness
 
-    for k in range(gaps):
-        for _ in range(x):
-            spaces_to_gap[k] += ' '
+    if spaces > 0:  # If i have to allocate spaces
+        for k in range(gaps):
+            for _ in range(x):
+                spaces_to_gap[k] += ' '
 
-    for k in range(gaps-1, gaps - y - 1, -1):
-        spaces_to_gap[k] += ' '
+        for k in range(gaps-1, gaps - y - 1, -1):
+            spaces_to_gap[k] += ' '
 
     k = 0
     for w in text[i:j+1]:
@@ -96,14 +97,12 @@ def justify(n):
 
         costs[i] = minimum
 
-    print(result)
-
     k = 0
-    for _ in range(0, n, result[k] - k):
-        if k < n:
-            print_txt(k, result[k] - 1)
-            k = result[k]
+    while k <= n-1:
+        print_txt(k, result[k]-1)
+        k = result[k]
     print()
+
 
 memo = []
 text = []
