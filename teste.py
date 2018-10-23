@@ -1,2 +1,2 @@
-for x in range(3):
-    print(x)
+results = [1 for _ in range(4)]
+print(results)

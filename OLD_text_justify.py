@@ -6,11 +6,6 @@ def buildMemo(text_length):
     return memo
 
 def badness(i, j):
-    """ Badness calculate how good or bad a word sequence is in a row.
-        It has a value of 500 if you have only one word in a row.
-        Return is squared to put even more weight on the difference,
-        that way we can avoid lines with many spaces """
-
     if i == j:
         return 500
 
@@ -109,7 +104,7 @@ text = []
 width = int(input())
 
 while width > 0:
-    line = input().split(' ')
+    line = input().split()
     if line[0] != '':
         for word in line:
             text.append(word)
